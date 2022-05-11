@@ -15,19 +15,19 @@ export default function Task() {
   return (
     <React.Fragment>
       <h2 className={'content-block'}>Tasks</h2>
-      <div className='MyClass'>
+      <div className={'grid-outer-container'}>
         <DataGrid
-          className={'dx-card wide-card'}
+          className={'grid-container'}
           dataSource={dataSource}
           showBorders={false}
           focusedRowEnabled={true}
           defaultFocusedRowIndex={0}
-          columnAutoWidth={true}
+          columnAutoWidth={true}          
           
           >
           <StateStoring enabled={true} type="localStorage" storageKey="WardApp_FilterKey" />
-          <Paging defaultPageSize={10} />
-          <Pager showPageSizeSelector={false} showInfo={true} />
+          {/* <Paging defaultPageSize={100} />
+          <Pager showPageSizeSelector={false} showInfo={true} /> */}
           <FilterRow visible={true} />
           <ColumnFixing enabled={true} />
 

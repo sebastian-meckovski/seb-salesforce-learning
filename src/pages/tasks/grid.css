@@ -1,15 +1,16 @@
-.MyClass{
-    border: 2px solid black;
-    max-width: 100%;
-    /* max-height: 70vh; */
-    /* padding-top: 20vh; */
-    overflow-x: scroll;
-    overflow-y: scroll;
-
+.grid-outer-container {
     position: absolute;
-    top: 100px;
+    top: 0px;
     bottom: 0px;
     left: 0px;
     right: 0px;
 }
 
+.grid-container {
+    position: absolute;
+    top: 100px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    height: auto;
+}
