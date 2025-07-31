@@ -11,7 +11,7 @@ public with sharing class ExpenseBatchApprover {
             WHERE Currency__c < 20000 AND Status__c != 'Approved'
         ];
         for (Expense__c exp : toApprove) {
-            exp.Status__c = 'Approved';
+            exp.Status__c = 'Rejected';
         }
         if (!toApprove.isEmpty()) {
             update toApprove;
