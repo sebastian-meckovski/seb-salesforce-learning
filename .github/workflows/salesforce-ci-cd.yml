@@ -1,0 +1,66 @@
+name: Salesforce CI/CD Pipeline
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    name: Validate Salesforce Changes
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Salesforce CLI
+        run: |
+          npm install @salesforce/cli --global
+          sf version
+
+      - name: Populate auth file with SFDX_URL secret
+        shell: bash
+        run: |
+          echo ${{ secrets.SFDX_PRODUCTION_URL}} > ./SFDX_PRODUCTION_URL.txt
+
+      - name: Authenticate to Production Org
+        run: sf org login sfdx-url --sfdx-url-file ./SFDX_PRODUCTION_URL.txt --alias production --set-default
+
+      - name: Run Apex Tests
+        run: sf apex run test --target-org production --wait 20 --result-format human --code-coverage
+
+      - name: Validate deployment (check-only)
+        run: sf project deploy start --target-org production --check-only --wait 20
+
+  deploy-to-production:
+    runs-on: ubuntu-latest
+    name: Deploy to Production
+    needs: validate
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Salesforce CLI
+        run: |
+          npm install @salesforce/cli --global
+          sf version
+
+      - name: Populate auth file with SFDX_URL secret
+        shell: bash
+        run: |
+          echo ${{ secrets.SFDX_PRODUCTION_URL}} > ./SFDX_PRODUCTION_URL.txt
+
+      - name: Authenticate to Production Org
+        run: sf org login sfdx-url --sfdx-url-file ./SFDX_PRODUCTION_URL.txt --alias production --set-default
+
+      - name: Deploy to Production
+        run: sf project deploy start --target-org production --test-level RunLocalTests --wait 30
+
+      - name: Run Apex Tests in Production
+        run: sf apex run test --target-org production --wait 20 --result-format human --code-coverage
