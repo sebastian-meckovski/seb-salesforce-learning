@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Rule_Name</fullName>
+    <active>true</active>
+    <description>Ensures that the Amount is greater than 0.</description>
+    <errorConditionFormula>Currency__c  &lt;= 0</errorConditionFormula>
+    <errorMessage>You idiot! Can&apos;t be smaller that 0...</errorMessage>
+</ValidationRule>

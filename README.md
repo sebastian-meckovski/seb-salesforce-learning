@@ -1,70 +1,65 @@
-# Getting Started with Create React App
+# Salesforce Learning Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repository contains my learning journey with Salesforce development, covering various aspects of the Salesforce platform and development tools.
 
-## Available Scripts
+## What I'm Learning
 
-In the project directory, you can run:
+### Apex Development
+- Writing Apex classes and triggers
+- Understanding Apex syntax and best practices
+- Database operations and SOQL queries
+- Exception handling and debugging
+- Unit testing with Test classes
 
-### `npm start`
+### Salesforce CLI
+- Setting up and configuring Salesforce CLI
+- Project creation and management
+- Deployment and retrieval commands
+- Working with scratch orgs and sandboxes
+- Metadata management
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Flows and Process Automation
+- Building Screen Flows and Record-Triggered Flows
+- Understanding Flow Builder interface
+- Implementing business logic with Flow elements
+- Testing and debugging Flows
+- Best practices for process automation
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Metadata Management
+- Understanding Salesforce metadata structure
+- Working with Custom Objects, Fields, and Permissions
+- Managing Profiles, Permission Sets, and Security
+- Version control for Salesforce metadata
+- Deployment strategies and best practices
 
-### `npm test`
+### Development Tools and Commands
+- VS Code with Salesforce Extension Pack
+- Working with Developer Console
+- Using Workbench for data operations
+- Understanding org development vs package development
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Learning Resources
 
-### `npm run build`
+- [Salesforce Developer Documentation](https://developer.salesforce.com/docs)
+- [Trailhead Learning Platform](https://trailhead.salesforce.com/)
+- [Apex Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/)
+- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Getting Started
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To work with this project:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Install Salesforce CLI
+2. Set up VS Code with Salesforce Extension Pack
+3. Clone this repository
+4. Authenticate with your Salesforce org using `sf org login web`
+5. Start exploring the code examples and exercises
 
-### `npm run eject`
+## Project Structure
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This repository will contain:
+- Apex classes and triggers
+- Flow definitions
+- Custom metadata configurations
+- Test classes and sample data
+- Documentation and learning notes

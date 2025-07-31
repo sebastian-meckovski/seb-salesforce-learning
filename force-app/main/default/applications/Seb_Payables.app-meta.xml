@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#0070D2</headerColor>
+        <logo>X9f353364b2584dc3aef713fad480e71c</logo>
+        <logoVersion>1</logoVersion>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <description>Let&apos;s make some money</description>
+    <formFactors>Small</formFactors>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <isOmniPinnedViewEnabled>false</isOmniPinnedViewEnabled>
+    <label>Seb Payables</label>
+    <navType>Standard</navType>
+    <tabs>Seb_Page</tabs>
+    <tabs>SebObject__c</tabs>
+    <tabs>Expense__c</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar>Seb_Payables_UtilityBar</utilityBar>
+</CustomApplication>
