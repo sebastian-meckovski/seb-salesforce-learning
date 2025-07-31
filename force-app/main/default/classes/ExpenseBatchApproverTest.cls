@@ -2,8 +2,8 @@
 private class ExpenseBatchApproverTest {
     @isTest static void testApproveExpensesUnder20000() {
         // Arrange: create test expenses
-        Expense__c e1 = new Expense__c(Name='Expense 1', Currency__c=15000, Status__c='Rejected');
-        Expense__c e2 = new Expense__c(Name='Expense 2', Currency__c=25000, Status__c='Rejected');
+        Expense__c e1 = new Expense__c(Name='Expense 1', Currency__c=15000, Status__c='Approved');
+        Expense__c e2 = new Expense__c(Name='Expense 2', Currency__c=25000, Status__c='Approved');
         insert new List<Expense__c>{e1, e2};
         
         // Act
