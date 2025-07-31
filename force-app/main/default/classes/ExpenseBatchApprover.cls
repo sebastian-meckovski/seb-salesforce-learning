@@ -8,7 +8,7 @@ public with sharing class ExpenseBatchApprover {
         List<Expense__c> toApprove = [
             SELECT Id, Currency__c, Status__c 
             FROM Expense__c 
-            WHERE Currency__c < 20000 AND Status__c != 'Approved'
+            WHERE Currency__c < 20000 AND Status__c != 'Rejected'
         ];
         for (Expense__c exp : toApprove) {
             exp.Status__c = 'Rejected';
