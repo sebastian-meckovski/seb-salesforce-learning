@@ -2,28 +2,10 @@
 
 ## Required Environment Variables (GitHub Secrets)
 
-You need to set up the following secrets in your GitHub repository settings (Settings → Secrets and variables → Actions):
+You need to set up the following secret in your GitHub repository settings (Settings → Secrets and variables → Actions):
 
-### 1. `SFDX_INTEGRATION_URL`
-- **Purpose**: Authentication URL for your integration/sandbox org used for validation
-- **How to get it**: 
-  ```bash
-  sf org login web --alias integration
-  sf org display --target-org integration --verbose
-  ```
-  Copy the "Sfdx Auth Url" value
-
-### 2. `SFDX_STAGING_URL` (Optional)
-- **Purpose**: Authentication URL for your staging environment
-- **How to get it**:
-  ```bash
-  sf org login web --alias staging
-  sf org display --target-org staging --verbose
-  ```
-  Copy the "Sfdx Auth Url" value
-
-### 3. `SFDX_PRODUCTION_URL`
-- **Purpose**: Authentication URL for your production org
+### `SFDX_PRODUCTION_URL`
+- **Purpose**: Authentication URL for your Salesforce org
 - **How to get it**:
   ```bash
   sf org login web --alias production
@@ -35,43 +17,26 @@ You need to set up the following secrets in your GitHub repository settings (Set
 
 ### Validation Job
 - Runs on every push and pull request
-- Validates metadata against integration org
+- Validates metadata against your org (no actual deployment)
 - Runs Apex tests
-- Performs check-only deployment
-
-### Deploy to Staging
-- Triggers only on pushes to `develop` branch
-- Deploys to staging environment
-- Runs tests after deployment
+- Performs validation deployment
 
 ### Deploy to Production
 - Triggers only on pushes to `master` branch
-- Requires manual approval (production environment protection)
+- Actually deploys changes to your org
 - Runs with `RunLocalTests` test level
-- Runs comprehensive tests after deployment
-
-### Destructive Changes (Optional)
-- Triggers when commit message contains `[destructive]`
-- Handles metadata deletions safely
-- Requires `manifest/destructiveChanges.xml` file
+- Runs tests after deployment
 
 ## Setup Steps
 
-1. **Set up GitHub Secrets**:
+1. **Set up GitHub Secret**:
    - Go to your GitHub repository
    - Navigate to Settings → Secrets and variables → Actions
-   - Add the three SFDX_*_URL secrets with their respective auth URLs
+   - Add `SFDX_PRODUCTION_URL` secret with your auth URL
 
-2. **Create Environment Protection Rules** (Recommended):
-   - Go to Settings → Environments
-   - Create a "production" environment
-   - Add required reviewers for production deployments
-   - Set up deployment protection rules
-
-3. **Branch Strategy**:
+2. **Branch Strategy**:
    - `master/main`: Production deployments
-   - `develop`: Staging deployments
-   - Feature branches: Validation only
+   - Other branches: Validation only
 
 ## Getting SFDX Auth URLs
 
