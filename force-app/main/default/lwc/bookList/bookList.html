@@ -1,0 +1,16 @@
+<template>
+    <lightning-card title="Book List">
+        <template if:true={books.data}>
+            <ul>
+                <template for:each={books.data} for:item="book">
+                    <li key={book.Id}>
+                        <b>{book.Title__c}</b> by {book.Author__c} — Rating: {book.Rating__c}
+                    </li>
+                </template>
+            </ul>
+        </template>
+        <template if:true={books.error}>
+            <p>Error loading books.</p>
+        </template>
+    </lightning-card>
+</template>
