@@ -169,12 +169,12 @@ private class BookControllerTest {
     
     @isTest
     static void testCreateBook_EmptyStrings() {
-        // Test creating a book with empty strings
+        // Test creating a book with empty strings (but valid rating)
         Test.startTest();
         Book__c newBook = BookController.createBook(
             '',
             '',
-            0,
+            1,  // Use 1 instead of 0 to satisfy validation rule
             ''
         );
         Test.stopTest();
@@ -184,7 +184,7 @@ private class BookControllerTest {
         System.assertNotEquals(null, newBook.Id, 'Book should have an Id');
         System.assertEquals('', newBook.Title__c, 'Title should be empty string');
         System.assertEquals('', newBook.Author__c, 'Author should be empty string');
-        System.assertEquals(0, newBook.Rating__c, 'Rating should be 0');
+        System.assertEquals(1, newBook.Rating__c, 'Rating should be 1 (minimum valid value)');
         System.assertEquals('', newBook.Review__c, 'Review should be empty string');
     }
     
@@ -208,5 +208,29 @@ private class BookControllerTest {
         // Verify both books exist in database (in addition to the 3 from @TestSetup)
         List<Book__c> allBooks = [SELECT Id FROM Book__c];
         System.assertEquals(5, allBooks.size(), 'Should have 5 total books (3 from setup + 2 new)');
+    }
+    
+    @isTest
+    static void testCreateBook_InvalidRating() {
+        // Test that invalid rating values are rejected by validation rules
+        Test.startTest();
+        try {
+            BookController.createBook('Test Book', 'Test Author', 0, 'Test Review');
+            System.assert(false, 'Should have thrown an exception for invalid rating');
+        } catch (DmlException e) {
+            // This is expected - validation rule should prevent rating of 0
+            System.assert(e.getMessage().contains('Rating must be between 1 and 5'), 
+                         'Exception should mention rating validation: ' + e.getMessage());
+        }
+        
+        try {
+            BookController.createBook('Test Book', 'Test Author', 6, 'Test Review');
+            System.assert(false, 'Should have thrown an exception for invalid rating');
+        } catch (DmlException e) {
+            // This is expected - validation rule should prevent rating of 6
+            System.assert(e.getMessage().contains('Rating must be between 1 and 5'), 
+                         'Exception should mention rating validation: ' + e.getMessage());
+        }
+        Test.stopTest();
     }
 }
