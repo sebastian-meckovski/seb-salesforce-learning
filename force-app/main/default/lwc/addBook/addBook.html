@@ -1,0 +1,17 @@
+<template>
+    <lightning-card title="Add New Book">
+        <div class="slds-p-around_medium">
+            <lightning-input label="Title" value={title} onchange={handleTitleChange}></lightning-input>
+            <lightning-input label="Author" value={author} onchange={handleAuthorChange}></lightning-input>
+            <lightning-input type="number" label="Rating (1-5)" value={rating} min="1" max="5" onchange={handleRatingChange}></lightning-input>
+            <lightning-textarea label="Review" value={review} onchange={handleReviewChange}></lightning-textarea>
+            <lightning-button label="Add Book" onclick={handleAddBook} variant="brand"></lightning-button>
+            <template if:true={message}>
+                <p class="slds-text-color_success">{message}</p>
+            </template>
+            <template if:true={error}>
+                <p class="slds-text-color_error">{error}</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>

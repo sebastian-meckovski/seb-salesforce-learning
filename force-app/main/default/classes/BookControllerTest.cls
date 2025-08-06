@@ -120,4 +120,93 @@ private class BookControllerTest {
             System.assert(false, 'Field access failed: ' + e.getMessage());
         }
     }
+    
+    @isTest
+    static void testCreateBook_Success() {
+        // Test successful book creation
+        Test.startTest();
+        Book__c newBook = BookController.createBook(
+            'Test Title',
+            'Test Author',
+            5,
+            'This is a test review'
+        );
+        Test.stopTest();
+        
+        // Verify the book was created and returned correctly
+        System.assertNotEquals(null, newBook, 'Returned book should not be null');
+        System.assertNotEquals(null, newBook.Id, 'Book should have an Id after insert');
+        System.assertEquals('Test Title', newBook.Title__c, 'Title should match input');
+        System.assertEquals('Test Author', newBook.Author__c, 'Author should match input');
+        System.assertEquals(5, newBook.Rating__c, 'Rating should match input');
+        System.assertEquals('This is a test review', newBook.Review__c, 'Review should match input');
+        
+        // Verify the book was actually inserted into the database
+        Book__c insertedBook = [SELECT Id, Title__c, Author__c, Rating__c, Review__c FROM Book__c WHERE Id = :newBook.Id];
+        System.assertEquals('Test Title', insertedBook.Title__c, 'Database record should match input');
+    }
+    
+    @isTest
+    static void testCreateBook_WithNullValues() {
+        // Test creating a book with some null values (should still work)
+        Test.startTest();
+        Book__c newBook = BookController.createBook(
+            'Title Only',
+            null,
+            null,
+            null
+        );
+        Test.stopTest();
+        
+        // Verify the book was created
+        System.assertNotEquals(null, newBook, 'Book should be created even with null values');
+        System.assertNotEquals(null, newBook.Id, 'Book should have an Id');
+        System.assertEquals('Title Only', newBook.Title__c, 'Title should be set');
+        System.assertEquals(null, newBook.Author__c, 'Author should be null');
+        System.assertEquals(null, newBook.Rating__c, 'Rating should be null');
+        System.assertEquals(null, newBook.Review__c, 'Review should be null');
+    }
+    
+    @isTest
+    static void testCreateBook_EmptyStrings() {
+        // Test creating a book with empty strings
+        Test.startTest();
+        Book__c newBook = BookController.createBook(
+            '',
+            '',
+            0,
+            ''
+        );
+        Test.stopTest();
+        
+        // Verify the book was created with empty values
+        System.assertNotEquals(null, newBook, 'Book should be created with empty strings');
+        System.assertNotEquals(null, newBook.Id, 'Book should have an Id');
+        System.assertEquals('', newBook.Title__c, 'Title should be empty string');
+        System.assertEquals('', newBook.Author__c, 'Author should be empty string');
+        System.assertEquals(0, newBook.Rating__c, 'Rating should be 0');
+        System.assertEquals('', newBook.Review__c, 'Review should be empty string');
+    }
+    
+    @isTest
+    static void testCreateBook_MultipleBooks() {
+        // Test creating multiple books in sequence
+        Test.startTest();
+        Book__c book1 = BookController.createBook('Book One', 'Author One', 3, 'Review One');
+        Book__c book2 = BookController.createBook('Book Two', 'Author Two', 4, 'Review Two');
+        Test.stopTest();
+        
+        // Verify both books were created with unique IDs
+        System.assertNotEquals(null, book1.Id, 'First book should have an Id');
+        System.assertNotEquals(null, book2.Id, 'Second book should have an Id');
+        System.assertNotEquals(book1.Id, book2.Id, 'Books should have different IDs');
+        
+        // Verify the data is correct for both
+        System.assertEquals('Book One', book1.Title__c, 'First book title should match');
+        System.assertEquals('Book Two', book2.Title__c, 'Second book title should match');
+        
+        // Verify both books exist in database (in addition to the 3 from @TestSetup)
+        List<Book__c> allBooks = [SELECT Id FROM Book__c];
+        System.assertEquals(5, allBooks.size(), 'Should have 5 total books (3 from setup + 2 new)');
+    }
 }
