@@ -233,4 +233,108 @@ private class BookControllerTest {
         }
         Test.stopTest();
     }
+    
+    @isTest
+    static void testUpdateBookRating_Success() {
+        // Test successful rating update
+        List<Book__c> testBooks = [SELECT Id, Rating__c FROM Book__c LIMIT 1];
+        Book__c testBook = testBooks[0];
+        Decimal originalRating = testBook.Rating__c;
+        Decimal newRating = 3.0;
+        
+        Test.startTest();
+        Book__c updatedBook = BookController.updateBookRating(testBook.Id, newRating);
+        Test.stopTest();
+        
+        // Verify the returned book has the updated rating
+        System.assertNotEquals(null, updatedBook, 'Updated book should not be null');
+        System.assertEquals(testBook.Id, updatedBook.Id, 'Book ID should match');
+        System.assertEquals(newRating, updatedBook.Rating__c, 'Rating should be updated');
+        
+        // Verify the database was actually updated
+        Book__c dbBook = [SELECT Id, Rating__c FROM Book__c WHERE Id = :testBook.Id];
+        System.assertEquals(newRating, dbBook.Rating__c, 'Database should reflect the updated rating');
+        System.assertNotEquals(originalRating, dbBook.Rating__c, 'Rating should be different from original');
+    }
+    
+    @isTest
+    static void testUpdateBookRating_ValidRatingRange() {
+        // Test updating with different valid ratings (1-5)
+        List<Book__c> testBooks = [SELECT Id FROM Book__c LIMIT 3];
+        
+        Test.startTest();
+        Book__c book1 = BookController.updateBookRating(testBooks[0].Id, 1);
+        Book__c book2 = BookController.updateBookRating(testBooks[1].Id, 5);
+        Book__c book3 = BookController.updateBookRating(testBooks[2].Id, 2.5);
+        Test.stopTest();
+        
+        // Verify all updates worked
+        System.assertEquals(1, book1.Rating__c, 'Rating should be 1');
+        System.assertEquals(5, book2.Rating__c, 'Rating should be 5');
+        System.assertEquals(2.5, book3.Rating__c, 'Rating should be 2.5');
+    }
+    
+    @isTest
+    static void testUpdateBookRating_InvalidRating() {
+        // Test that invalid ratings are rejected by validation rules
+        List<Book__c> testBooks = [SELECT Id FROM Book__c LIMIT 1];
+        Book__c testBook = testBooks[0];
+        
+        Test.startTest();
+        try {
+            BookController.updateBookRating(testBook.Id, 0);
+            System.assert(false, 'Should have thrown an exception for rating of 0');
+        } catch (DmlException e) {
+            System.assert(e.getMessage().contains('Rating must be between 1 and 5'), 
+                         'Exception should mention rating validation: ' + e.getMessage());
+        }
+        
+        try {
+            BookController.updateBookRating(testBook.Id, 6);
+            System.assert(false, 'Should have thrown an exception for rating of 6');
+        } catch (DmlException e) {
+            System.assert(e.getMessage().contains('Rating must be between 1 and 5'), 
+                         'Exception should mention rating validation: ' + e.getMessage());
+        }
+        Test.stopTest();
+    }
+    
+    @isTest
+    static void testUpdateBookRating_NonExistentBook() {
+        // Test updating a book that doesn't exist
+        Test.startTest();
+        try {
+            // Create a fake ID that doesn't exist
+            Id fakeId = Book__c.SObjectType.getDescribe().getKeyPrefix() + '000000000000';
+            BookController.updateBookRating(fakeId, 3);
+            System.assert(false, 'Should have thrown an exception for non-existent book');
+        } catch (QueryException e) {
+            // This is expected - should get "List has no rows for assignment to SObject"
+            System.assert(e.getMessage().contains('List has no rows'), 
+                         'Should get no rows exception: ' + e.getMessage());
+        }
+        Test.stopTest();
+    }
+    
+    @isTest
+    static void testUpdateBookRating_MultipleUpdates() {
+        // Test updating the same book multiple times
+        List<Book__c> testBooks = [SELECT Id, Rating__c FROM Book__c LIMIT 1];
+        Book__c testBook = testBooks[0];
+        
+        Test.startTest();
+        Book__c update1 = BookController.updateBookRating(testBook.Id, 2);
+        Book__c update2 = BookController.updateBookRating(testBook.Id, 4);
+        Book__c update3 = BookController.updateBookRating(testBook.Id, 1);
+        Test.stopTest();
+        
+        // Verify each update worked
+        System.assertEquals(2, update1.Rating__c, 'First update should set rating to 2');
+        System.assertEquals(4, update2.Rating__c, 'Second update should set rating to 4');
+        System.assertEquals(1, update3.Rating__c, 'Third update should set rating to 1');
+        
+        // Verify final state in database
+        Book__c finalBook = [SELECT Rating__c FROM Book__c WHERE Id = :testBook.Id];
+        System.assertEquals(1, finalBook.Rating__c, 'Final rating should be 1');
+    }
 }

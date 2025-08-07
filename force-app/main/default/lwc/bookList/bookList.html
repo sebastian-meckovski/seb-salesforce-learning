@@ -5,6 +5,16 @@
                 <template for:each={books.data} for:item="book">
                     <li key={book.Id}>
                         <b>{book.Title__c}</b> by {book.Author__c} — Rating: {book.Rating__c}
+                        <lightning-input type="number" label="Change Rating" min="1" max="5"
+                            value={book.Rating__c}
+                            data-id={book.Id}
+                            onchange={handleRatingInput}
+                            class="slds-m-left_small slds-m-bottom_xx-small"
+                            style="width: 120px; display: inline-block;"
+                        ></lightning-input>
+                        <lightning-button label="Save" variant="brand" data-id={book.Id} onclick={handleSaveRating}
+                            class="slds-m-left_xx-small"
+                        ></lightning-button>
                     </li>
                 </template>
             </ul>

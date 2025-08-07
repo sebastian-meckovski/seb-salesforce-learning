@@ -15,4 +15,12 @@ public with sharing class BookController {
         insert newBook;
         return newBook;
     }
+    
+    @AuraEnabled
+    public static Book__c updateBookRating(Id bookId, Decimal newRating) {
+        Book__c book = [SELECT Id, Rating__c FROM Book__c WHERE Id = :bookId LIMIT 1];
+        book.Rating__c = newRating;
+        update book;
+        return book;
+    }
 }
