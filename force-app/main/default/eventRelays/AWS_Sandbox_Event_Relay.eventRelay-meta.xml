@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EventRelayConfig xmlns="http://soap.sforce.com/2006/04/metadata">
+    <destinationResourceName>callout:US_East_1</destinationResourceName>
+    <eventChannel>ChangeEvents</eventChannel>
+    <eventChannel>/event/Book_Update__e</eventChannel>
+    <label>AWS Sandbox Event Relay</label>
+    <relayOption>{"ReplayRecovery":"LATEST"}</relayOption>
+    <state>RUN</state>
+</EventRelayConfig>
