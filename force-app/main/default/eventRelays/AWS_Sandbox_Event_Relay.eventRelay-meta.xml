@@ -3,6 +3,6 @@
     <destinationResourceName>callout:US_East_1</destinationResourceName>
     <eventChannel>ChangeEvents</eventChannel>
     <label>AWS Sandbox Event Relay</label>
-    <relayOption>{"ReplayRecovery":"LATEST"}</relayOption>
+    <relayOption>{&quot;ReplayRecovery&quot;:&quot;LATEST&quot;}</relayOption>
     <state>RUN</state>
 </EventRelayConfig>
