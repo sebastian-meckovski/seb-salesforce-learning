@@ -14,7 +14,7 @@
         </value>
     </constants>
     <decisions>
-         <name>Decision_1</name>
+        <name>Decision_1</name>
         <label>Amount Less Than 2000</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
