@@ -4,5 +4,5 @@
     <eventChannel>/event/Book_Update__e</eventChannel>
     <label>AWS Platform Events Relay</label>
     <relayOption>{"ReplayRecovery":"LATEST"}</relayOption>
-    <state>RUN</state>
+    <state>STOP</state>
 </EventRelayConfig>
