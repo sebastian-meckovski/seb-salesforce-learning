@@ -160,13 +160,12 @@ private class BookTriggerTest {
         Book_Update__e testEvent = new Book_Update__e();
         
         // Publish the event
-        List<Database.SaveResult> results = EventBus.publish(testEvent);
-        
+        Database.SaveResult result = EventBus.publish(testEvent);
+
         Test.stopTest();
-        
+
         // Verify the event was published successfully
-        System.assertEquals(1, results.size(), 'Should have one publish result');
-        System.assertEquals(true, results[0].isSuccess(), 'Event should be published successfully');
+        System.assertEquals(true, result.isSuccess(), 'Event should be published successfully');
     }
     
     @isTest
