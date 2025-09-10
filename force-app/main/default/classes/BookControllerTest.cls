@@ -337,4 +337,37 @@ private class BookControllerTest {
         Book__c finalBook = [SELECT Rating__c FROM Book__c WHERE Id = :testBook.Id];
         System.assertEquals(1, finalBook.Rating__c, 'Final rating should be 1');
     }
+
+    @isTest
+    static void testDeleteBook_Success() {
+        // Create a standalone book to delete
+        Book__c b = new Book__c(Title__c='To Delete', Author__c='X', Rating__c=1, Review__c='');
+        insert b;
+
+        Test.startTest();
+        BookController.deleteBook(b.Id);
+        Test.stopTest();
+
+        // Verify it was deleted
+        try {
+            Book__c shouldNotExist = [SELECT Id FROM Book__c WHERE Id = :b.Id];
+            System.assert(false, 'Query should have thrown because record was deleted');
+        } catch (QueryException e) {
+            System.assert(e.getMessage().toLowerCase().contains('no rows'), 'Should not find deleted record');
+        }
+    }
+
+    @isTest
+    static void testDeleteBook_NonExistent() {
+        // Attempt to delete a non-existent Id and expect an exception
+        Id fakeId = Book__c.SObjectType.getDescribe().getKeyPrefix() + '000000000000';
+        Test.startTest();
+        try {
+            BookController.deleteBook(fakeId);
+            System.assert(false, 'Expected exception for non-existent record');
+        } catch (Exception e) {
+            System.assert(true, 'Exception expected: ' + e.getMessage());
+        }
+        Test.stopTest();
+    }
 }

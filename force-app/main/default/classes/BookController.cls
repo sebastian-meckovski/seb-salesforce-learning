@@ -23,4 +23,11 @@ public with sharing class BookController {
         update book;
         return book;
     }
+
+    @AuraEnabled
+    public static void deleteBook(Id bookId) {
+        // Delete the specified book record
+        Book__c book = [SELECT Id FROM Book__c WHERE Id = :bookId LIMIT 1];
+        delete book;
+    }
 }

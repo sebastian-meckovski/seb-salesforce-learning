@@ -15,6 +15,9 @@
                         <lightning-button label="Save" variant="brand" data-id={book.Id} onclick={handleSaveRating}
                             class="slds-m-left_xx-small"
                         ></lightning-button>
+                        <lightning-button label="Delete" variant="destructive" data-id={book.Id} onclick={handleDeleteBook}
+                            class="slds-m-left_xx-small"
+                        ></lightning-button>
                     </li>
                 </template>
             </ul>
