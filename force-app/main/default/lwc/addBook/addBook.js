@@ -1,5 +1,7 @@
-import { LightningElement } from 'lwc';
+import { LightningElement, wire } from 'lwc';
 import createBook from '@salesforce/apex/BookController.createBook';
+import { publish, MessageContext } from 'lightning/messageService';
+import BOOK_ADDED_CHANNEL from '@salesforce/messageChannel/BookAdded__c';
 
 export default class AddBook extends LightningElement {
     title = '';
@@ -8,6 +10,9 @@ export default class AddBook extends LightningElement {
     review = '';
     message = '';
     error = '';
+
+    @wire(MessageContext)
+    messageContext;
 
     handleTitleChange(event) {
         this.title = event.target.value;
@@ -26,14 +31,19 @@ export default class AddBook extends LightningElement {
         this.message = '';
         this.error = '';
         try {
-            await createBook({ 
-                title: this.title, 
-                author: this.author, 
-                rating: parseInt(this.rating, 10), 
-                review: this.review 
+            const result = await createBook({
+                title: this.title,
+                author: this.author,
+                rating: parseInt(this.rating, 10),
+                review: this.review
             });
             this.message = 'Book added successfully!';
-            // Optionally reset fields
+
+            // Publish message to refresh book list
+            const payload = { bookId: result.Id };
+            publish(this.messageContext, BOOK_ADDED_CHANNEL, payload);
+
+            // Reset fields
             this.title = '';
             this.author = '';
             this.rating = 1;
