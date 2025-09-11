@@ -1,0 +1,31 @@
+.tile {
+    border-radius: 12px;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+}
+.value {
+    font-size: 28px;
+    font-weight: 700;
+}
+.label {
+    color: #3e3e3c;
+}
+.delta {
+    font-size: 12px;
+}
+
+.delta-red {
+    color: #c23934;
+}
+
+.delta-green {
+    color: #2e844a;
+}
+
+.delta-gray {
+    color: #8e9397;
+}
+

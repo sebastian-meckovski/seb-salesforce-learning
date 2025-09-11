@@ -1,0 +1,17 @@
+<template>
+    <lightning-card title="Dashboard Overview">
+        <div class="slds-p-around_medium">
+            <div class="tile-grid slds-grid slds-wrap slds-gutters">
+                <template for:each={tiles} for:item="t">
+                    <div key={t.id} class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-p-around_small">
+                        <div class="tile slds-box slds-theme_default slds-text-align_center">
+                            <div class="value">{t.value}</div>
+                            <div class="label slds-text-title_caps">{t.label}</div>
+                            <div class={t.deltaClass}>{t.delta}</div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </lightning-card>
+</template>
