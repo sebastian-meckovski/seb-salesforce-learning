@@ -18,6 +18,7 @@
     <tabs>Seb_Page</tabs>
     <tabs>SebObject__c</tabs>
     <tabs>Expense__c</tabs>
+    <tabs>Task__c</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Seb_Payables_UtilityBar</utilityBar>
 </CustomApplication>

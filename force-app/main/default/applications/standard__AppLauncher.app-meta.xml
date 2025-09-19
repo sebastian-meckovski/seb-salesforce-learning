@@ -8,4 +8,5 @@
     <isOmniPinnedViewEnabled>false</isOmniPinnedViewEnabled>
     <tabs>standard-AppLauncher</tabs>
     <tabs>Expense__c</tabs>
+    <tabs>Task__c</tabs>
 </CustomApplication>

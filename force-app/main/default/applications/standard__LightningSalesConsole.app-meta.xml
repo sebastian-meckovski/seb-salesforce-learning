@@ -22,11 +22,15 @@
     <tabs>standard-CollaborationGroup</tabs>
     <tabs>standard-File</tabs>
     <tabs>Expense__c</tabs>
+    <tabs>Task__c</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>LightningSalesConsole_UtilityBar</utilityBar>
     <workspaceConfig>
         <mappings>
             <tab>Expense__c</tab>
+        </mappings>
+        <mappings>
+            <tab>Task__c</tab>
         </mappings>
         <mappings>
             <tab>standard-Account</tab>

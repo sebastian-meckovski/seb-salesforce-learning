@@ -17,6 +17,7 @@
     <navType>Standard</navType>
     <tabs>Book__c</tabs>
     <tabs>Book_Manager_Top_Secret</tabs>
+    <tabs>Task__c</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Book_Manager_UtilityBar</utilityBar>
 </CustomApplication>

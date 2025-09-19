@@ -54,4 +54,3 @@ private class ExpenseRestControllerTest {
         System.assertEquals('Missing id or description in request.', result, 'Error message should match');
     }
 }
-

@@ -9,10 +9,14 @@
     <navType>Console</navType>
     <tabs>standard-ApprovalsHome</tabs>
     <tabs>Expense__c</tabs>
+    <tabs>Task__c</tabs>
     <uiType>Lightning</uiType>
     <workspaceConfig>
         <mappings>
             <tab>Expense__c</tab>
+        </mappings>
+        <mappings>
+            <tab>Task__c</tab>
         </mappings>
         <mappings>
             <tab>standard-ApprovalsHome</tab>

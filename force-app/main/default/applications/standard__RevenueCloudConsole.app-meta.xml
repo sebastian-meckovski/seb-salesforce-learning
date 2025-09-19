@@ -10,11 +10,15 @@
     <tabs>standard-Product2</tabs>
     <tabs>standard-Pricebook2</tabs>
     <tabs>Expense__c</tabs>
+    <tabs>Task__c</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>RevenueCloudConsole_UtilityBar</utilityBar>
     <workspaceConfig>
         <mappings>
             <tab>Expense__c</tab>
+        </mappings>
+        <mappings>
+            <tab>Task__c</tab>
         </mappings>
         <mappings>
             <tab>standard-Pricebook2</tab>

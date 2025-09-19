@@ -15,5 +15,6 @@
     <tabs>standard-OperatingHours</tabs>
     <tabs>standard-ServiceAppointment</tabs>
     <tabs>Expense__c</tabs>
+    <tabs>Task__c</tabs>
     <uiType>Lightning</uiType>
 </CustomApplication>

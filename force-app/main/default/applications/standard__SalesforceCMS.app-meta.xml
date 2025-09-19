@@ -12,10 +12,14 @@
     <tabs>standard-CmsWorkspaces</tabs>
     <tabs>standard-CmsExperiences</tabs>
     <tabs>Expense__c</tabs>
+    <tabs>Task__c</tabs>
     <uiType>Lightning</uiType>
     <workspaceConfig>
         <mappings>
             <tab>Expense__c</tab>
+        </mappings>
+        <mappings>
+            <tab>Task__c</tab>
         </mappings>
         <mappings>
             <tab>standard-CmsAuthorHome</tab>
