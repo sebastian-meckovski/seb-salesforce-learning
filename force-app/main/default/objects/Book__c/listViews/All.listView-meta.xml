@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ListView xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>Status__c</columns>
+    <columns>UPDATEDBY_USER</columns>
+    <columns>Author__c</columns>
+    <columns>CREATEDBY_USER</columns>
+    <columns>CREATEDBY_USER.ALIAS</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>LAST_UPDATE</columns>
+    <columns>OWNER.FIRST_NAME</columns>
+    <columns>OWNER.LAST_NAME</columns>
+    <columns>Rating__c</columns>
+    <columns>OBJECT_ID</columns>
+    <columns>Review__c</columns>
+    <columns>Title__c</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>
 </ListView>

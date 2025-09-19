@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <description>A status of this thing</description>
+    <label>Status</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>New</fullName>
+                <default>false</default>
+                <label>New</label>
+            </value>
+            <value>
+                <fullName>Old</fullName>
+                <default>false</default>
+                <label>Old</label>
+            </value>
+            <value>
+                <fullName>KindaNew</fullName>
+                <default>false</default>
+                <label>Kinda new</label>
+            </value>
+            <value>
+                <fullName>VeryOld</fullName>
+                <default>false</default>
+                <label>Very old</label>
+            </value>
+            <value>
+                <fullName>very very new</fullName>
+                <default>false</default>
+                <label>very very new</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
