@@ -75,8 +75,7 @@ export default class BookList extends LightningElement {
             }
             await deleteBook({ bookId });
             await refreshApex(this.books);
-            this.dispatchEvent(new ShowToastEvent({ title: 'Deleted', message: 'Book deleted', variant: 'success' }));
-        } catch (err) {
+       } catch (err) {
             // eslint-disable-next-line no-console
             console.error('Error deleting book', err);
             this.dispatchEvent(new ShowToastEvent({ title: 'Error deleting book', message: err.body ? err.body.message : err.message, variant: 'error' }));
